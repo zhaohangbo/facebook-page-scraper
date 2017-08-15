@@ -6,7 +6,7 @@ import time
 import sys
 import argparse # Using argparse to parse cli arguments
 #import subprocess
-#import os
+import os
 
 try:
     from urllib.request import urlopen, Request
@@ -87,7 +87,6 @@ def getFacebookPageFeedUrl(base_url):
 
 
 def getReactionsForStatuses(base_url):
-
     reaction_types = ['like', 'love', 'wow', 'haha', 'sad', 'angry']
     reactions_dict = {}   # dict of {status_id: tuple<6>}
 
@@ -155,13 +154,16 @@ def processFacebookPageFeedStatus(status):
 
 
 def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date, file_name):
-    with open('csv/{}_facebook_statuses.csv'.format(file_name), 'w') as file:
-        w = csv.writer(file)
-        w.writerow(["status_id", "status_message", "link_name", "status_type",
-                    "status_link", "status_published", "num_reactions",
-                    "num_comments", "num_shares", "num_likes", "num_loves",
-                    "num_wows", "num_hahas", "num_sads", "num_angrys",
-                    "num_special"])
+	if not os.path.exists('csv'):
+		os.makedirs('csv')
+
+	with open('csv/{}_facebook_statuses.csv'.format(file_name), 'w') as file:
+		w = csv.writer(file)
+		w.writerow(["status_id", "status_message", "link_name", "status_type",
+					"status_link", "status_published", "num_reactions",
+					"num_comments", "num_shares", "num_likes", "num_loves",
+					"num_wows", "num_hahas", "num_sads", "num_angrys",
+					"num_special"])
 
         has_next_page = True
         num_processed = 0
