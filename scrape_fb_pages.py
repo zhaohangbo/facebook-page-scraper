@@ -60,7 +60,11 @@ page_ids = [
         #Mcheza
         "246794449031956", #Mcheza fans 2800
         #Betyetu
-        "546815985451460" # Betyetu (@Betyetu) fans 65K
+        "546815985451460", # Betyetu (@Betyetu) fans 65K
+        #goal.com
+        "25427813597", # goal.com global fans 16.6M
+        #all football
+        "1195121897229652" # all football global fans 2.3M
 ]
 
 page_id_name = {
@@ -91,6 +95,10 @@ page_id_name = {
 		"246794449031956" : "Mcheza",
         #Betyetu
 		"546815985451460" : "BetYetu"
+        #goal.com
+		"25427813597" : "Goal_Com"
+        #all football
+		"1195121897229652" : "All_Football"
 }
 
 def scrape_all():
