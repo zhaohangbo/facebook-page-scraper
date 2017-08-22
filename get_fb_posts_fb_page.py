@@ -165,53 +165,53 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date, 
 					"num_wows", "num_hahas", "num_sads", "num_angrys",
 					"num_special"])
 
-        has_next_page = True
-        num_processed = 0
-        scrape_starttime = datetime.datetime.now()
-        after = ''
-        base = "https://graph.facebook.com/v2.9"
-        node = "/{}/posts".format(page_id)
-        parameters = "/?limit={}&access_token={}".format(100, access_token)
-        since = "&since={}".format(since_date) if since_date \
-            is not '' else ''
-        until = "&until={}".format(until_date) if until_date \
-            is not '' else ''
+		has_next_page = True
+		num_processed = 0
+		scrape_starttime = datetime.datetime.now()
+		after = ''
+		base = "https://graph.facebook.com/v2.9"
+		node = "/{}/posts".format(page_id)
+		parameters = "/?limit={}&access_token={}".format(100, access_token)
+		since = "&since={}".format(since_date) if since_date \
+			is not '' else ''
+		until = "&until={}".format(until_date) if until_date \
+			is not '' else ''
 
-        print("Scraping {} Facebook Page: {}\n".format(page_id, scrape_starttime))
+		print("Scraping {} Facebook Page: {}\n".format(page_id, scrape_starttime))
 
-        while has_next_page:
-            after = '' if after is '' else "&after={}".format(after)
-            base_url = base + node + parameters + after + since + until
-            print 'base_url is : ' + base_url
+		while has_next_page:
+			after = '' if after is '' else "&after={}".format(after)
+			base_url = base + node + parameters + after + since + until
+			print 'base_url is : ' + base_url
 
-            url = getFacebookPageFeedUrl(base_url)
-            statuses = json.loads(request_until_succeed(url))
-            reactions = getReactionsForStatuses(base_url)
+			url = getFacebookPageFeedUrl(base_url)
+			statuses = json.loads(request_until_succeed(url))
+			reactions = getReactionsForStatuses(base_url)
 
-            for status in statuses['data']:
+			for status in statuses['data']:
 
-                # Ensure it is a status with the expected metadata
-                if 'reactions' in status:
-                    status_data = processFacebookPageFeedStatus(status)
-                    reactions_data = reactions[status_data[0]]
+				# Ensure it is a status with the expected metadata
+				if 'reactions' in status:
+					status_data = processFacebookPageFeedStatus(status)
+					reactions_data = reactions[status_data[0]]
 
-                    # calculate thankful/pride through algebra
-                    num_special = status_data[6] - sum(reactions_data)
-                    w.writerow(status_data + reactions_data + (num_special,))
+					# calculate thankful/pride through algebra
+					num_special = status_data[6] - sum(reactions_data)
+					w.writerow(status_data + reactions_data + (num_special,))
 
-                num_processed += 1
-                if num_processed % 100 == 0:
-                    print("{} Statuses Processed: {}".format
-                          (num_processed, datetime.datetime.now()))
+				num_processed += 1
+				if num_processed % 100 == 0:
+					print("{} Statuses Processed: {}".format
+							(num_processed, datetime.datetime.now()))
 
-            # if there is no next page, we're done.
-            if 'paging' in statuses:
-                after = statuses['paging']['cursors']['after']
-            else:
-                has_next_page = False
+			# if there is no next page, we're done.
+			if 'paging' in statuses:
+				after = statuses['paging']['cursors']['after']
+			else:
+				has_next_page = False
 
-        print("\nDone!\n{} Statuses Processed in {}".format(
-              num_processed, datetime.datetime.now() - scrape_starttime))
+		print("\nDone!\n{} Statuses Processed in {}".format(
+				num_processed, datetime.datetime.now() - scrape_starttime))
 
 if __name__ == '__main__':
 	print "page_id = " +  page_id
