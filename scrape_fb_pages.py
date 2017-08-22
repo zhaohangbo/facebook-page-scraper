@@ -14,7 +14,7 @@ app_secret = "cac0d9826e6ff8533b67c7bccbf9e1ea" #Hangbo Zhao's app_secret
 
 # input date formatted as YYYY-MM-DD
 date_now = datetime.datetime.now().strftime ("%Y-%m-%d")
-time_delta = 7
+time_delta = 3*365
 date_7_days_ago = (datetime.datetime.now() - datetime.timedelta(days= time_delta)).strftime ("%Y-%m-%d")
 since_date_default = date_7_days_ago  #"2017-07-8"
 until_date_default = date_now #"2017-07-15"
@@ -94,11 +94,11 @@ page_id_name = {
 		#Mcheza
 		"246794449031956" : "Mcheza",
         #Betyetu
-		"546815985451460" : "BetYetu"
+		"546815985451460" : "BetYetu",
         #goal.com
-		"25427813597" : "Goal_Com"
+        "25427813597" : "Goal_Com",
         #all football
-		"1195121897229652" : "All_Football"
+        "1195121897229652" : "All_Football"
 }
 
 def scrape_all():
