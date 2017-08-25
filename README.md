@@ -36,7 +36,7 @@ python scrape_fb_pages.py --page_id 123123 --access_token "your_access_token"
 | `--page_id ` | __"all"__ means scraping all default pages, __OR__ a specific facebook page_id like __"12321xxxxx"__|
 | `--access_token ` | temporary access_token for facebook developer|
 | `--since_date` | date start scraping, __"date 7 days ago by default"__, format YYYY-MM-DD|
-| `--date_until` | date end scraping, __"date today by default"__, format YYYY-MM-DD|
+| `--until_date` | date end scraping, __"date today by default"__, format YYYY-MM-DD|
 
 ## Help Guide
 Run 
