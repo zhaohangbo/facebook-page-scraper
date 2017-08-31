@@ -14,7 +14,7 @@ app_secret = "cac0d9826e6ff8533b67c7bccbf9e1ea" #Hangbo Zhao's app_secret
 
 # input date formatted as YYYY-MM-DD
 date_now = datetime.datetime.now().strftime ("%Y-%m-%d")
-time_delta = 3*365
+time_delta = 7
 date_7_days_ago = (datetime.datetime.now() - datetime.timedelta(days= time_delta)).strftime ("%Y-%m-%d")
 since_date_default = date_7_days_ago  #"2017-07-8"
 until_date_default = date_now #"2017-07-15"
